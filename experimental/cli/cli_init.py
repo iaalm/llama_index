@@ -1,0 +1,19 @@
+from .configuration import load_config, save_config
+
+
+def init_cli(args):
+    config = load_config(args.directory)
+    save_config(config, args.directory)
+
+
+def register_init_cli(subparsers):
+    parser = subparsers.add_parser("init")
+    parser.add_argument(
+        "directory",
+        default=".",
+        nargs="?",
+        help="Directory to init",
+    )
+
+    parser.set_defaults(func=init_cli)
+
